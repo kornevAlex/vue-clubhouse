@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+
+  postgres:
+    image: postgres
+    restart: always
+    volumes:
+      - './docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d'
+      - './sql_vqs3_files:/sql_vqs3_files'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8888:8080
+    links:
+      - postgres
+
+  metabase:
+    image: metabase/metabase
+    restart: always
+    ports:
+      - 3000:3000
+    links:
+      - postgres
