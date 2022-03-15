@@ -33,5 +33,8 @@
     "node_modules",
     ".nuxt",
     "dist"
+  ],
+  "include": [
+    "server/types.d.ts"
   ]
 }

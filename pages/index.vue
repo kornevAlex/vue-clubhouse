@@ -13,6 +13,7 @@ import EnterCodeStep from '~/components/steps/EnterCodeStep.vue';
 import ChooseAvatarStep from '~/components/steps/ChooseAvatarStep.vue';
 import EnterNameStep from '~/components/steps/EnterNameStep.vue';
 import TwitterStep from '~/components/steps/TwitterStep.vue';
+import { mapMutations } from 'vuex';
 
 export default Vue.extend({
   components: {
@@ -28,10 +29,29 @@ export default Vue.extend({
       pages: ['WelcomeStep', 'TwitterStep', 'EnterNameStep', 'ChooseAvatarStep', 'EnterPhoneStep', 'EnterCodeStep']
     }
   },
+  beforeMount() {
+    this.actualStep()
+  },
+  watch: {
+    userInfo: {
+      handler() {
+        window.localStorage.setItem('userInfo', JSON.stringify(this.userInfo));
+      },
+      deep: true
+    }
+  },
+  methods: {
+    ...mapMutations({
+      actualStep: 'steps/getActualStep'
+    })
+  },
   computed: {
     ...mapGetters({
       step: 'steps/getStep',
+      userInfo: 'user/getUserInfo'
     }),
+    localStor() {
+    }
   },
   layout: 'registration',
 })

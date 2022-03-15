@@ -25,6 +25,7 @@ export default {
   plugins: [
     '~/plugins/hello',
     '~/plugins/v-mask',
+    '~/plugins/axios'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -58,7 +59,4 @@ export default {
     },
     { path: "/api", handler: "~/serverMiddleware/api-server.js" }
   ],
-  axios: {
-    baseURL: 'http://localhost:3001/',
-  }
 }

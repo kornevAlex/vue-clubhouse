@@ -22,7 +22,7 @@
 import  WhiteBlock  from '../WhiteBlock.vue';
 import  Button  from '../Button.vue';
 import  StepInfo  from '../StepInfo.vue';
-import { mapMutations } from 'vuex';
+import { mapMutations, mapActions } from 'vuex';
 
 export default {
     components: {
@@ -37,14 +37,20 @@ export default {
         }
     },
     methods: {
+      ...mapActions({
+        confirmCode: 'steps/confirmCode'
+      }),
       async activate() {
         try {
           this.isLoading = true;
-          await this.$axios.get('/todos');
-          this.isLoading = false;
-          this.$router.push('/rooms');
+          const confirm = await this.confirmCode(this.codes.join(''));
+          if(confirm) {
+            await this.$api.get('/todos');
+            this.isLoading = false;
+            this.$router.push('/rooms');
+          }
         } catch (error) {
-          alert('Ошибка активации')
+          console.log('Ошибка активации', error)
         }
       },
       nextElementFocus(ev) {

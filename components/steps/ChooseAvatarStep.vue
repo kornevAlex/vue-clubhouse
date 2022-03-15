@@ -7,7 +7,7 @@
       />
       <WhiteBlock class="m-auto mt-40 whiteBlock">
             <div class="avatar">
-                <Avatar width="120px" height="120px" :src="avatarURL" :key="avatarKey"/>
+                <Avatar width="120px" height="120px" :src="avatarURL" :key="avatarKey" :letters="cutsName"/>
             </div>
             <div class="mb-30">
                 <label for="image" class="link cup">
@@ -49,7 +49,6 @@ export default {
 
         if(file) {
           const imageURL = URL.createObjectURL(file);
-          // this.avatarURL = imageURL;
           await this.uploadPhoto(file);
           this.avatarKey += 1;
           ev.target.value = null;
@@ -74,6 +73,9 @@ export default {
           this.setPhoto(val);
         },
       },
+      cutsName() {
+        return this.fullName.split(" ").map(el => el[0]).join('');
+      }
     },
 }
 </script>

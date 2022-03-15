@@ -11,7 +11,7 @@
             placeholder="+7 (999) 333-22-11"/>
             <img src="~/static/russian-flag.png" alt="flag" :width="24"/>
         </div>
-        <Button :disabled="nextDisabled" :clicked="nextSteps">
+        <Button :disabled="nextDisabled" :clicked="sendSMS">
           Next
           <img class="d-ib ml-10" src="~/static/arrow.svg" />
         </Button>
@@ -27,7 +27,7 @@
 import StepInfo from '~/components/StepInfo.vue';
 import WhiteBlock from '~/components/WhiteBlock.vue';
 import Button from '~/components/Button.vue';
-import { mapMutations } from 'vuex';
+import { mapMutations, mapActions } from 'vuex';
 
 export default {
     components: {
@@ -41,9 +41,12 @@ export default {
         }
     },
     methods: {
-      ...mapMutations({
-        nextSteps: 'steps/nextSteps',
+      ...mapActions({
+        sendPhone: "steps/sendSMS"
       }),
+      sendSMS() {
+        this.sendPhone(this.phone)
+      }
     },
     computed: {
       nextDisabled() {

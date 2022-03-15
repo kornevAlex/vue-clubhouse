@@ -31,6 +31,7 @@
   </div>
 </template>
 <script>
+import Cookie from 'js-cookie';
 import { mapMutations } from 'vuex';
 import WhiteBlock from "../WhiteBlock.vue";
 import Button from "../Button.vue";
@@ -47,6 +48,9 @@ export default {
       if(typeof data === "string" && data.includes('avatarUrl')) {
         const json = JSON.parse(data)
         this.setUserInfo(json)
+
+        Cookie.set('token', json.token )
+        
         this.nextSteps()
       }
     });

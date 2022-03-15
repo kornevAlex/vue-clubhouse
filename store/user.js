@@ -26,14 +26,17 @@ export const getters = {
 
 export const mutations = {
     setUserInfo(state, item) {
-        state.userInfo = item
+        state.userInfo = item;
     },
     updateFullName(state, item) {
-        state.userInfo.fullName = item
+        state.userInfo.fullName = item;
     },
     uploadsPhoto(state, item) {
-        state.userInfo.avatarUrl = item
+        state.userInfo.avatarUrl = item;
     },
+    setUserPhone(state, phone) {
+        state.userInfo.phone = phone;
+    }
 };
 
 export const actions = {
